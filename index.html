@@ -37,14 +37,67 @@
 			color: var( --text );
 			font-family: 'DM Sans', system-ui, sans-serif;
 			min-height: 100vh;
-			padding: 32px 16px 64px;
+			padding: 32px 16px 40px;
+			position: relative;
+		}
+
+		/* Background grid pattern */
+
+		body::before {
+			content: '';
+			position: fixed;
+			inset: 0;
+			z-index: -1;
+			background-image:
+				linear-gradient( to right, rgba( 255, 255, 255, 0.04 ) 1px, transparent 1px ),
+				linear-gradient( to bottom, rgba( 255, 255, 255, 0.04 ) 1px, transparent 1px );
+			background-size: 24px 24px;
+			mask-image: radial-gradient( ellipse at center, transparent, var( --bg ) );
+			-webkit-mask-image: radial-gradient( ellipse at center, transparent, var( --bg ) );
 		}
 
 		/* Header */
 
 		.app-header {
 			text-align: center;
-			margin-bottom: 48px;
+			margin-bottom: 24px;
+		}
+
+		/* Tab bar */
+
+		.tab-bar {
+			position: sticky;
+			top: 0;
+			z-index: 50;
+			background: var( --bg );
+			padding: 12px 16px;
+			display: flex;
+			gap: 8px;
+			max-width: 1132px;
+			margin: 0 auto 32px;
+		}
+
+		.tab-btn {
+			flex: 1;
+			padding: 8px 4px;
+			border-radius: 8px;
+			border: 1px solid var( --border );
+			background: var( --surface );
+			color: var( --text-dim );
+			font-family: 'DM Sans', system-ui, sans-serif;
+			font-size: 12px;
+			font-weight: 500;
+			cursor: pointer;
+			text-align: center;
+			transition: all 0.15s;
+			white-space: nowrap;
+		}
+
+		.tab-btn.is-active {
+			background: var( --accent-dim );
+			border-color: var( --accent );
+			color: var( --accent );
+			font-weight: 600;
 		}
 
 		.app-header h1 {
@@ -65,7 +118,11 @@
 		.section {
 			max-width: 1100px;
 			margin: 0 auto 48px;
-			scroll-margin-top: 48px;
+			scroll-margin-top: 80px;
+		}
+
+		.section:last-of-type {
+			margin-bottom: 0;
 		}
 
 		.section__title {
@@ -207,14 +264,39 @@
 
 		/* Responsive */
 
-		@media ( max-width: 640px ) {
+		@media ( min-width: 768px ) and ( max-width: 991px ) {
+
+			.section__grid {
+				grid-template-columns: repeat( 2, 1fr );
+			}
+
+			.section__grid .card:first-child {
+				grid-column: 1 / -1;
+			}
+
+		}
+
+		@media ( max-width: 1199px ) {
+
+			.scroll-nav {
+				display: none;
+			}
+
+		}
+
+		@media ( max-width: 767px ) {
 
 			.section__grid {
 				grid-template-columns: 1fr;
 			}
 
-			.scroll-nav {
-				display: none;
+			.tab-bar {
+				gap: 20px;
+				padding: 12px 0;
+			}
+
+			.tab-btn {
+				flex: 1;
 			}
 
 		}
@@ -230,6 +312,12 @@
 		<p class="subtitle">Blindtext & Überschriften zum Kopieren</p>
 
 	</header><!-- end /.app-header -->
+
+	<div class="tab-bar">
+		<button class="tab-btn js-tab-btn" data-target="section-headlines">Überschriften</button>
+		<button class="tab-btn js-tab-btn" data-target="section-bodytext">Fließtext</button>
+		<button class="tab-btn js-tab-btn" data-target="section-lists">Listen</button>
+	</div><!-- end /.tab-bar -->
 
 	<section class="section" id="section-headlines">
 
@@ -458,9 +546,14 @@
 			const navItems = document.querySelectorAll( '.js-nav-item' );
 			const sections = document.querySelectorAll( '.section[id]' );
 
+			const tabBtns = document.querySelectorAll( '.js-tab-btn' );
+
 			const setActive = ( id ) => {
 				navItems.forEach( item => {
 					item.classList.toggle( 'is-active', item.dataset.target === id );
+				});
+				tabBtns.forEach( btn => {
+					btn.classList.toggle( 'is-active', btn.dataset.target === id );
 				});
 			};
 
@@ -475,7 +568,19 @@
 
 			sections.forEach( section => observer.observe( section ) );
 
-			// Smooth scroll on click + immediate active state
+			// Tab bar clicks
+
+			tabBtns.forEach( btn => {
+
+				btn.addEventListener( 'click', () => {
+					setActive( btn.dataset.target );
+					const target = document.getElementById( btn.dataset.target );
+					target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				});
+
+			});
+
+			// Scroll nav clicks + immediate active state
 
 			navItems.forEach( item => {
 
