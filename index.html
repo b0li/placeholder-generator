@@ -65,6 +65,7 @@
 		.section {
 			max-width: 1100px;
 			margin: 0 auto 48px;
+			scroll-margin-top: 48px;
 		}
 
 		.section__title {
@@ -431,8 +432,9 @@
 
 					if ( ! textEl ) return;
 
-					// Get plain text, normalise whitespace for list items
-					const text = textEl.innerText.trim();
+					// Copy HTML for list cards, plain text for others
+					const hasList = textEl.querySelector( 'ul' );
+					const text = hasList ? textEl.innerHTML.trim() : textEl.innerText.trim();
 
 					navigator.clipboard.writeText( text ).then( () => {
 
