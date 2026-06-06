@@ -107,6 +107,18 @@
 			user-select: text;
 		}
 
+		.card__text ul {
+			padding-left: 18px;
+		}
+
+		.card__text ul li {
+			margin-bottom: 4px;
+		}
+
+		.card__text ul ul {
+			margin-top: 4px;
+		}
+
 		.card__footer {
 			display: flex;
 			justify-content: flex-end;
@@ -139,12 +151,70 @@
 			color: #1a1d23;
 		}
 
+		/* Scroll Nav */
+
+		.scroll-nav {
+			position: fixed;
+			right: 24px;
+			top: 50%;
+			transform: translateY( -50% );
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			z-index: 100;
+		}
+
+		.scroll-nav__item {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			cursor: pointer;
+			text-decoration: none;
+			justify-content: flex-end;
+		}
+
+		.scroll-nav__label {
+			font-size: 0.75rem;
+			color: var( --text-dim );
+			opacity: 0;
+			transition: opacity 0.2s;
+			white-space: nowrap;
+		}
+
+		.scroll-nav__item:hover .scroll-nav__label {
+			opacity: 1;
+		}
+
+		.scroll-nav__dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: var( --border );
+			transition: background 0.2s, transform 0.2s;
+			flex-shrink: 0;
+		}
+
+		.scroll-nav__item:hover .scroll-nav__dot,
+		.scroll-nav__item.is-active .scroll-nav__dot {
+			background: var( --accent );
+			transform: scale( 1.4 );
+		}
+
+		.scroll-nav__item.is-active .scroll-nav__label {
+			opacity: 1;
+			color: var( --accent );
+		}
+
 		/* Responsive */
 
 		@media ( max-width: 640px ) {
 
 			.section__grid {
 				grid-template-columns: 1fr;
+			}
+
+			.scroll-nav {
+				display: none;
 			}
 
 		}
@@ -161,7 +231,7 @@
 
 	</header><!-- end /.app-header -->
 
-	<section class="section">
+	<section class="section" id="section-headlines">
 
 		<p class="section__title">Überschriften</p>
 
@@ -195,7 +265,7 @@
 
 	</section><!-- end /.section -->
 
-	<section class="section">
+	<section class="section" id="section-bodytext">
 
 		<p class="section__title">Fließtext</p>
 
@@ -229,11 +299,126 @@
 
 	</section><!-- end /.section -->
 
+	<section class="section" id="section-lists">
+
+		<p class="section__title">Listen</p>
+
+		<div class="section__grid">
+
+			<div class="card">
+				<span class="card__label">Einfach (ul &gt; li)</span>
+				<div class="card__text">
+					<ul>
+						<li>Lorem ipsum dolor sit amet</li>
+						<li>Consectetur adipiscing elit</li>
+						<li>Sed do eiusmod tempor</li>
+						<li>Ut labore et dolore magna</li>
+						<li>Quis nostrud exercitation</li>
+					</ul>
+				</div>
+				<div class="card__footer">
+					<button class="btn btn--accent js-copy">Kopieren</button>
+				</div>
+			</div><!-- end /.card -->
+
+			<div class="card">
+				<span class="card__label">Zweistufig (ul &gt; li &gt; ul &gt; li)</span>
+				<div class="card__text">
+					<ul>
+						<li>Lorem ipsum dolor sit amet
+							<ul>
+								<li>Consectetur adipiscing</li>
+								<li>Sed do eiusmod tempor</li>
+							</ul>
+						</li>
+						<li>Ut labore et dolore magna
+							<ul>
+								<li>Quis nostrud exercitation</li>
+								<li>Ullamco laboris nisi</li>
+							</ul>
+						</li>
+						<li>Duis aute irure dolor
+							<ul>
+								<li>Voluptate velit esse</li>
+								<li>Cillum dolore eu fugiat</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="card__footer">
+					<button class="btn btn--accent js-copy">Kopieren</button>
+				</div>
+			</div><!-- end /.card -->
+
+			<div class="card">
+				<span class="card__label">Dreistufig (ul &gt; li &gt; ul &gt; li &gt; ul &gt; li)</span>
+				<div class="card__text">
+					<ul>
+						<li>Lorem ipsum dolor sit amet
+							<ul>
+								<li>Consectetur adipiscing
+									<ul>
+										<li>Sed do eiusmod</li>
+										<li>Tempor incididunt</li>
+									</ul>
+								</li>
+								<li>Ut labore et dolore
+									<ul>
+										<li>Magna aliqua enim</li>
+										<li>Quis nostrud veniam</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>Duis aute irure dolor
+							<ul>
+								<li>Reprehenderit voluptate
+									<ul>
+										<li>Velit esse cillum</li>
+										<li>Dolore eu fugiat</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="card__footer">
+					<button class="btn btn--accent js-copy">Kopieren</button>
+				</div>
+			</div><!-- end /.card -->
+
+		</div><!-- end /.section__grid -->
+
+	</section><!-- end /.section -->
+
+	<!-- Fixed scroll navigation -->
+
+	<nav class="scroll-nav" aria-label="Sektionsnavigation">
+
+		<a class="scroll-nav__item js-nav-item" href="#section-headlines" data-target="section-headlines" aria-label="Zu Überschriften springen">
+			<span class="scroll-nav__label">Überschriften</span>
+			<span class="scroll-nav__dot"></span>
+		</a>
+
+		<a class="scroll-nav__item js-nav-item" href="#section-bodytext" data-target="section-bodytext" aria-label="Zu Fließtext springen">
+			<span class="scroll-nav__label">Fließtext</span>
+			<span class="scroll-nav__dot"></span>
+		</a>
+
+		<a class="scroll-nav__item js-nav-item" href="#section-lists" data-target="section-lists" aria-label="Zu Listen springen">
+			<span class="scroll-nav__label">Listen</span>
+			<span class="scroll-nav__dot"></span>
+		</a>
+
+	</nav><!-- end /.scroll-nav -->
+
 	<script>
 
 		(function() {
 
 			'use strict';
+
+			// Copy buttons
 
 			const copyBtns = document.querySelectorAll( '.js-copy' );
 
@@ -242,9 +427,12 @@
 				btn.addEventListener( 'click', function() {
 
 					const card = btn.closest( '.card' );
-					const text = card?.querySelector( '.card__text' )?.textContent?.trim();
+					const textEl = card?.querySelector( '.card__text' );
 
-					if ( ! text ) return;
+					if ( ! textEl ) return;
+
+					// Get plain text, normalise whitespace for list items
+					const text = textEl.innerText.trim();
 
 					navigator.clipboard.writeText( text ).then( () => {
 
@@ -259,6 +447,42 @@
 						}, 1500 );
 
 					});
+
+				});
+
+			});
+
+			// Scroll nav – active state via IntersectionObserver
+
+			const navItems = document.querySelectorAll( '.js-nav-item' );
+			const sections = document.querySelectorAll( '.section[id]' );
+
+			const observer = new IntersectionObserver( entries => {
+
+				entries.forEach( entry => {
+
+					if ( ! entry.isIntersecting ) return;
+
+					navItems.forEach( item => {
+						item.classList.toggle( 'is-active', item.dataset.target === entry.target.id );
+					});
+
+				});
+
+			}, { threshold: 0.4 });
+
+			sections.forEach( section => observer.observe( section ) );
+
+			// Smooth scroll on click
+
+			navItems.forEach( item => {
+
+				item.addEventListener( 'click', ( e ) => {
+					e.preventDefault();
+
+					const target = document.getElementById( item.dataset.target );
+
+					target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 				});
 
