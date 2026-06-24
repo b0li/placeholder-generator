@@ -218,6 +218,10 @@
 			overflow: hidden;
 		}
 
+		.card__text a {
+			color: var( --accent );
+		}
+
 		.card__text ul {
 			padding-left: 18px;
 		}
@@ -372,6 +376,7 @@
 		<button class="tab-btn js-tab-btn" data-target="section-headlines">Überschriften</button>
 		<button class="tab-btn js-tab-btn" data-target="section-bodytext">Fließtext</button>
 		<button class="tab-btn js-tab-btn" data-target="section-lists">Listen</button>
+		<button class="tab-btn js-tab-btn" data-target="section-typography">Typografie</button>
 	</div><!-- end /.tab-bar -->
 
 	<section class="section" id="section-headlines">
@@ -552,6 +557,70 @@
 
 	</section><!-- end /.section -->
 
+	<section class="section" id="section-typography">
+
+		<div class="section__header">
+			<p class="section__title">Typografie</p>
+			<div class="section__controls">
+				<button class="height-btn js-height-btn" data-step="-20" aria-label="Höhe verringern">−</button>
+				<button class="height-btn js-height-btn" data-step="20" aria-label="Höhe erhöhen">+</button>
+			</div>
+		</div><!-- end /.section__header -->
+
+		<div class="section__grid">
+
+			<div class="card">
+				<span class="card__label">Headlines h1–h6</span>
+				<div class="card__text js-html-content">
+					<h1>h1 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h1>
+					<h2>h2 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
+					<h3>h3 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+					<h4>h4 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
+					<h5>h5 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+					<h6>h6 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h6>
+				</div>
+				<div class="card__footer">
+					<button class="btn btn--accent js-copy">Kopieren</button>
+				</div>
+			</div><!-- end /.card -->
+
+			<div class="card">
+				<span class="card__label">Headline + Paragraph</span>
+				<div class="card__text js-html-content">
+					<h1>h1 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<h2>h2 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<h3>h3 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<h4>h4 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h4>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<h5>h5 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<h6>h6 headline – Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h6>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				</div>
+				<div class="card__footer">
+					<button class="btn btn--accent js-copy">Kopieren</button>
+				</div>
+			</div><!-- end /.card -->
+
+			<div class="card">
+				<span class="card__label">Paragraph mit Link, Fett &amp; Kursiv</span>
+				<div class="card__text js-html-content">
+					<p>Lorem ipsum dolor sit amet, <strong>consectetur adipisicing elit</strong>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad <a href="#">minim veniam</a>, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<p>Duis aute irure dolor in <em>reprehenderit in voluptate</em> velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui <strong>officia deserunt mollit</strong> anim id est laborum.</p>
+					<p>Sed ut perspiciatis unde omnis iste natus error sit <a href="#">voluptatem accusantium</a> doloremque laudantium. Nemo enim ipsam voluptatem quia voluptas sit <em>aspernatur aut odit</em> aut fugit, sed quia consequuntur magni dolores.</p>
+				</div>
+				<div class="card__footer">
+					<button class="btn btn--accent js-copy">Kopieren</button>
+				</div>
+			</div><!-- end /.card -->
+
+		</div><!-- end /.section__grid -->
+
+	</section><!-- end /.section -->
+
 	<!-- Fixed scroll navigation -->
 
 	<nav class="scroll-nav" aria-label="Sektionsnavigation">
@@ -568,6 +637,11 @@
 
 		<a class="scroll-nav__item js-nav-item" href="#section-lists" data-target="section-lists" aria-label="Zu Listen springen">
 			<span class="scroll-nav__label">Listen</span>
+			<span class="scroll-nav__dot"></span>
+		</a>
+
+		<a class="scroll-nav__item js-nav-item" href="#section-typography" data-target="section-typography" aria-label="Zu Typografie springen">
+			<span class="scroll-nav__label">Typografie</span>
 			<span class="scroll-nav__dot"></span>
 		</a>
 
@@ -615,8 +689,8 @@
 					if ( ! textEl ) return;
 
 					// Copy HTML for list cards, plain text for others
-					const hasList = textEl.querySelector( 'ul' );
-					const text = hasList ? textEl.innerHTML.trim() : textEl.innerText.trim();
+					const isHtml = textEl.querySelector( 'ul' ) || textEl.classList.contains( 'js-html-content' );
+					const text = isHtml ? textEl.innerHTML.trim() : textEl.innerText.trim();
 
 					navigator.clipboard.writeText( text ).then( () => {
 
